@@ -2,7 +2,7 @@
 
 namespace Devhelp\Component\Backup\Provider;
 
-use League\Flysystem\AdapterInterface;
+use League\Flysystem\FilesystemInterface;
 
 /**
  * Class FilesystemAdapterProvider
@@ -12,39 +12,39 @@ use League\Flysystem\AdapterInterface;
 class FilesystemAdapterProvider
 {
     /**
-     * @var AdapterInterface
+     * @var FilesystemInterface
      */
-    private $remoteAdapter;
+    private $remoteFilesystem;
 
     /**
-     * @var AdapterInterface
+     * @var FilesystemInterface
      */
-    private $localAdapter;
+    private $localFilesystem;
 
     /**
-     * @param AdapterInterface $remoteAdapter
-     * @param AdapterInterface $localAdapter
+     * @param FilesystemInterface $remoteFilesystem
+     * @param FilesystemInterface $localFilesystem
      */
-    public function __construct(AdapterInterface $remoteAdapter, AdapterInterface $localAdapter)
+    public function __construct(FilesystemInterface $remoteFilesystem, FilesystemInterface $localFilesystem)
     {
-        $this->remoteAdapter = $remoteAdapter;
-        $this->localAdapter = $localAdapter;
+        $this->remoteFilesystem = $remoteFilesystem;
+        $this->localFilesystem = $localFilesystem;
     }
 
     /**
-     * @return AdapterInterface
+     * @return FilesystemInterface
      */
-    public function getRemoteAdapter()
+    public function getRemoteFilesystem()
     {
-        return $this->remoteAdapter;
+        return $this->remoteFilesystem;
     }
 
     /**
-     * @return AdapterInterface
+     * @return FilesystemInterface
      */
-    public function getLocalAdapter()
+    public function getLocalFilesystem()
     {
-        return $this->localAdapter;
+        return $this->localFilesystem;
     }
 
 }

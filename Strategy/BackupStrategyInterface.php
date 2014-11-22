@@ -8,7 +8,7 @@ use Devhelp\Component\Backup\Type\File;
  * Interface BackupStrategyInterface provides
  * files list to backup
  *
- * @package Devhelp\Component\Backup
+ * @author <michal@devhelp.pl>
  */
 interface BackupStrategyInterface
 {

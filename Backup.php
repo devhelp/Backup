@@ -48,8 +48,8 @@ class Backup
      */
     protected function backupFile(File $file)
     {
-        $local = $this->filesystemAdapterProvider->getLocalAdapter();
-        $remote = $this->filesystemAdapterProvider->getRemoteAdapter();
+        $local = $this->filesystemAdapterProvider->getLocalFilesystem();
+        $remote = $this->filesystemAdapterProvider->getRemoteFilesystem();
         /** @var resource $fileStream */
         $fileStream = $remote->readStream($file);
         $local->writeStream($file, $fileStream);

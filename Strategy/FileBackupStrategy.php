@@ -6,6 +6,7 @@ use Devhelp\Component\Backup\Type\File;
 
 /**
  * Class FileBackupStrategy
+ *
  * @author <michal@devhelp.pl>
  */
 class FileBackupStrategy implements BackupStrategyInterface
