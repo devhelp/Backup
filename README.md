@@ -1,6 +1,7 @@
 # Backup component
 
 [![Build Status](https://travis-ci.org/devhelp/Backup.svg?branch=master)](https://travis-ci.org/devhelp/Backup)
+[![Coverage Status](https://coveralls.io/repos/devhelp/Backup/badge.png)](https://coveralls.io/r/devhelp/Backup)
 
 ## Purpose
 
