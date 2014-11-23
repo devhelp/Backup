@@ -1,5 +1,7 @@
 # Backup component
 
+[![Build Status](https://travis-ci.org/devhelp/Backup.svg?branch=master)](https://travis-ci.org/devhelp/Backup)
+
 ## Purpose
 
 This component provides backup functionality. It uses `Flysystem` component.
