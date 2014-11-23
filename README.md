@@ -4,6 +4,8 @@
 
 This component provides backup functionality. It uses `Flysystem` component.
 
+## Instalation
+
 ## Usage
 
 ```php
@@ -27,9 +29,12 @@ This component provides backup functionality. It uses `Flysystem` component.
         'timeout' => 30,
     )));
     
+    $listStrategy = new FileListBackupStrategy();
+    $listStrategy->setRemoteAdapter($ftp);
+    
     $local = new Filesystem(new LocalAdapter($dir));
     $adapterProvider = new FilesystemAdapterProvider($ftp, $local);
     
-    $backup = new Backup($adapterProvider, new FileBackupStrategy('/log/error.log'));
+    $backup = new Backup($adapterProvider, $listStrategy);
     $backup->runBackup();
 ```

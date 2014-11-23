@@ -9,5 +9,5 @@ namespace Devhelp\Component\Backup\Exception;
  */
 interface Exception
 {
-    
+
 }

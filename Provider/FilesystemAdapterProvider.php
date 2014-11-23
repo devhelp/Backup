@@ -2,6 +2,7 @@
 
 namespace Devhelp\Component\Backup\Provider;
 
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\FilesystemInterface;
 
 /**
@@ -17,15 +18,15 @@ class FilesystemAdapterProvider
     private $remoteFilesystem;
 
     /**
-     * @var FilesystemInterface
+     * @var AdapterInterface
      */
     private $localFilesystem;
 
     /**
      * @param FilesystemInterface $remoteFilesystem
-     * @param FilesystemInterface $localFilesystem
+     * @param AdapterInterface $localFilesystem
      */
-    public function __construct(FilesystemInterface $remoteFilesystem, FilesystemInterface $localFilesystem)
+    public function __construct(FilesystemInterface $remoteFilesystem, AdapterInterface $localFilesystem)
     {
         $this->remoteFilesystem = $remoteFilesystem;
         $this->localFilesystem = $localFilesystem;
@@ -40,7 +41,7 @@ class FilesystemAdapterProvider
     }
 
     /**
-     * @return FilesystemInterface
+     * @return AdapterInterface
      */
     public function getLocalFilesystem()
     {
