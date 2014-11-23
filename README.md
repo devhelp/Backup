@@ -6,6 +6,8 @@ This component provides backup functionality. It uses `Flysystem` component.
 
 ## Instalation
 
+```composer require 'devhelp/backup:dev-master'```
+
 ## Usage
 
 ```php
