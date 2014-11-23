@@ -25,11 +25,6 @@
         "psr-4": { "Devhelp\\Component\\Backup\\": "" }
     },
     "autoload-dev": {
-
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "dev"
-        }
+        "psr-4": { "Devhelp\\Component\\Backup\\Tests": "" }
     }
 }
