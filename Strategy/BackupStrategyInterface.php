@@ -18,4 +18,4 @@ interface BackupStrategyInterface
      * @return File[]
      */
     public function getFileList();
-} 
+}

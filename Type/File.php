@@ -38,4 +38,4 @@ class File
     {
         return (string) $this === (string) $file;
     }
-} 
+}

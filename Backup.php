@@ -54,4 +54,4 @@ class Backup
         $fileStream = $remote->readStream($file);
         $local->writeStream($file, $fileStream);
     }
-} 
+}
