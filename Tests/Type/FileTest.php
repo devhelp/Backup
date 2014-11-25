@@ -27,6 +27,47 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function getName()
+    {
+        $file = new File("/web/test/index.html");
+
+        $this->assertEquals("index", $file->getName());
+    }
+
+    /**
+     * @test
+     */
+    public function getBasename()
+    {
+        $file = new File("/web/test/index.html");
+
+        $this->assertEquals("index.html", $file->getBasename());
+    }
+
+
+    /**
+     * @test
+     */
+    public function getExtension()
+    {
+        $file = new File("/web/test/index.html");
+
+        $this->assertEquals("html", $file->getExtension());
+    }
+
+    /**
+     * @test
+     */
+    public function getDirName()
+    {
+        $file = new File("/web/test/index.html");
+
+        $this->assertEquals("/web/test", $file->getDirName());
+    }
+
+    /**
+     * @test
+     */
     public function __toString()
     {
         $file = new File("web/simple.txt");

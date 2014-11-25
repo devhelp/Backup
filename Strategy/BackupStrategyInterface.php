@@ -5,8 +5,7 @@ namespace Devhelp\Component\Backup\Strategy;
 use Devhelp\Component\Backup\Type\File;
 
 /**
- * Interface BackupStrategyInterface provides
- * files list to backup
+ * Interface provides files list to create backup
  *
  * @author <michal@devhelp.pl>
  */

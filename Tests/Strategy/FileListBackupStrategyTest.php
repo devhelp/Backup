@@ -14,90 +14,265 @@ use League\Flysystem\FilesystemInterface;
 class FileListBackupStrategyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var FileListBackupStrategy
-     */
-    private $fileListBackupStrategy;
-
-    /**
-     * setUp test
-     */
-    public function setUp()
-    {
-        $this->fileListBackupStrategy = new FileListBackupStrategy();
-    }
-
-    /**
      * @dataProvider
      */
-    public function getFilesProvider()
+    public function getAllFilesProvider()
     {
         return array(
             array(
+                array(
+                    array('path' => '/web/test1.jpg'),
+                    array('path' => '/web/test2.jpg'),
+                    array('path' => '/web/test3.jpg'),
+                    array('path' => '/web/test4.jpg'),
+                    array('path' => '/web/test5.jpg'),
+                    array('path' => '/web/test6.png'),
+                    array('path' => '/web/test7.gif')
+                ),
+
                 array(
                     new File('/web/test1.jpg'),
                     new File('/web/test2.jpg'),
                     new File('/web/test3.jpg'),
                     new File('/web/test4.jpg'),
-                    new File('/web/test5.jpg')
+                    new File('/web/test5.jpg'),
+                    new File('/web/test6.png'),
+                    new File('/web/test7.gif'),
                 )
             )
         );
     }
 
     /**
-     * @test
+     * @dataProvider
      */
-    public function setRemoteAdapter()
+    public function getWithIgnoredFileFilesProvider()
     {
-        $this->assertAttributeEquals(null, 'remoteFilesystem', $this->fileListBackupStrategy);
-        $this->fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock());
-        $this->assertAttributeEquals($this->getRemoteFilesystemMock(), 'remoteFilesystem', $this->fileListBackupStrategy);
+        return array(
+            array(
+                array(
+                    array('path' => '/web/test1.jpg'),
+                    array('path' => '/web/test2.jpg'),
+                    array('path' => '/web/test3.jpg'),
+                    array('path' => '/web/test4.jpg'),
+                    array('path' => '/web/test5.jpg'),
+                    array('path' => '/web/test6.png'),
+                    array('path' => '/web/test7.gif')
+                ),
+
+                array(
+                    new File('/web/test1.jpg'),
+                    new File('/web/test2.jpg'),
+                    new File('/web/test4.jpg'),
+                    new File('/web/test5.jpg'),
+                    new File('/web/test6.png'),
+                    new File('/web/test7.gif')
+                )
+            )
+        );
     }
 
     /**
-     * @dataProvider getFilesProvider
-     * @test
-     * @param File[] $files
+     * @dataProvider
      */
-    public function getFileList(array $files)
+    public function getWithIgnoredExtensionProvider()
     {
-        $this->fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock());
-        $result = $this->fileListBackupStrategy->getFileList();
+        return array(
+            array(
+                array(
+                    array('path' => 'test1.jpg'),
+                    array('path' => '/web/test2.jpg'),
+                    array('path' => '/web/test/test3.jpg'),
+                    array('path' => '/web/test4.jpg'),
+                    array('path' => '/web/test/test/test5.jpg'),
+                    array('path' => '/web/test6.png'),
+                    array('path' => 'test7.gif'),
+                    array('path' => 'test/test'),
+                ),
 
-        foreach ($result as $k => $file) {
-            $this->assertEquals($file, $files[$k]);
-        }
+                array(
+                    new File('/web/test6.png'),
+                    new File('test7.gif'),
+                    new File('test/test')
+                )
+            )
+        );
     }
 
     /**
+     * @dataProvider
+     */
+    public function getWithIgnoredDirectoriesProvider()
+    {
+        return array(
+            array(
+                array(
+                    array('path' => 'test1.jpg'),
+                    array('path' => '/web/test2.jpg'),
+                    array('path' => '/web/test/test3.jpg'),
+                    array('path' => '/web/test4.jpg'),
+                    array('path' => '/web/test/test/test5.jpg'),
+                    array('path' => '/web/test6.png'),
+                    array('path' => 'test7.gif'),
+                    array('path' => 'test/test'),
+                ),
+
+                array(
+                    new File('test1.jpg'),
+                    new File('test7.gif'),
+                    new File('test/test')
+                )
+            )
+        );
+    }
+
+    /**
+     * @dataProvider
+     */
+    public function getWithAllFiltersProvider()
+    {
+        return array(
+            array(
+                array(
+                    array('path' => 'test1.jpg'),
+                    array('path' => '/web/test2.jpg'),
+                    array('path' => '/web/test/test3.jpg'),
+                    array('path' => '/web/test4.jpg'),
+                    array('path' => '/web/test/test/test5.jpg'),
+                    array('path' => '/web/test6.png'),
+                    array('path' => 'test7.gif'),
+                    array('path' => 'test/test.php'),
+                ),
+
+                array(
+                    new File('test7.gif')
+                )
+            )
+        );
+    }
+
+    /**
+     * @dataProvider getAllFilesProvider
+     * @test
+     * @param array $input
+     */
+    public function setRemoteAdapter(array $input)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $this->assertAttributeEquals(null, 'remoteFilesystem', $fileListBackupStrategy);
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+        $this->assertAttributeEquals($this->getRemoteFilesystemMock($input), 'remoteFilesystem', $fileListBackupStrategy);
+    }
+
+    /**
+     * @dataProvider getWithIgnoredFileFilesProvider
+     * @test
+     * @param array $input
+     * @param File[] $output
+     */
+    public function getFileListWithIgnoredFile(array $input, array $output)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+
+        $fileListBackupStrategy
+            ->addIgnoredFiles(new File('/web/test3.jpg'));
+
+        $result = $fileListBackupStrategy->getFileList();
+
+        $this->assertEquals($result, $output);
+
+    }
+
+    /**
+     * @dataProvider getWithIgnoredExtensionProvider
+     * @test
+     * @param array $input
+     * @param File[] $output
+     */
+    public function getFileListWithIgnoredExtensions(array $input, array $output)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+
+        $fileListBackupStrategy->addIgnoredExtension('jpg');
+
+        $result = $fileListBackupStrategy->getFileList();
+
+        $this->assertEquals($result, $output);
+    }
+
+
+    /**
+     * @dataProvider getAllFilesProvider
+     * @test
+     * @param array $input
+     * @param File[] $output
+     */
+    public function getFileList(array $input, array $output)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+
+        $result = $fileListBackupStrategy->getFileList();
+
+        $this->assertEquals($result, $output);
+    }
+
+    /**
+     * @dataProvider getWithIgnoredDirectoriesProvider
+     * @test
+     * @param array $input
+     * @param File[] $output
+     */
+    public function getFileListWithIgnoredDirectory(array $input, array $output)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+
+        $fileListBackupStrategy->addIgnoredDirectory('/web');
+
+        $result = $fileListBackupStrategy->getFileList();
+
+        $this->assertEquals($result, $output);
+    }
+
+    /**
+     * @dataProvider getWithAllFiltersProvider
+     * @test
+     * @param array $input
+     * @param File[] $output
+     */
+    public function getFilesWithAllFiltersProvider(array $input, array $output)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+
+        $fileListBackupStrategy->addIgnoredDirectory('/web')
+            ->addIgnoredExtension('jpg')
+            ->addIgnoredFiles(new File('test/test.php'));
+        ;
+
+        $result = $fileListBackupStrategy->getFileList();
+
+        $this->assertEquals($result, $output);
+    }
+
+    /**
+     * @param array $input
      * @return FilesystemInterface
      */
-    private function getRemoteFilesystemMock()
+    private function getRemoteFilesystemMock(array $input)
     {
         $mock = $this->getMockBuilder('League\Flysystem\FilesystemInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
-
         $mock->expects($this->any())
             ->method('listFiles')
-            ->will($this->returnValue($this->getArrayFileList()));
+            ->will($this->returnValue($input));
 
         return $mock;
-    }
-
-    /**
-     * @return array
-     */
-    private function getArrayFileList()
-    {
-        return array(
-            array('path' => '/web/test1.jpg'),
-            array('path' => '/web/test2.jpg'),
-            array('path' => '/web/test3.jpg'),
-            array('path' => '/web/test4.jpg'),
-            array('path' => '/web/test5.jpg')
-        );
     }
 
 }

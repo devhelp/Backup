@@ -31,6 +31,38 @@ class File
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return pathinfo($this->path, PATHINFO_FILENAME);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirName()
+    {
+        return pathinfo($this->path, PATHINFO_DIRNAME);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBasename()
+    {
+        return pathinfo($this->path, PATHINFO_BASENAME);
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtension()
+    {
+        return pathinfo($this->path, PATHINFO_EXTENSION);
+    }
+
+    /**
      * @param File $file
      * @return bool
      */
