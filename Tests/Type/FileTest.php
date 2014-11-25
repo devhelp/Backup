@@ -25,9 +25,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @test
+     * Without annotations here
      */
-    public function getName()
+    public function testGetName()
     {
         $file = new File("/web/test/index.html");
 
