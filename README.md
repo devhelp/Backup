@@ -1,7 +1,7 @@
 # Backup component
 
 [![Build Status](https://travis-ci.org/devhelp/Backup.svg?branch=master)](https://travis-ci.org/devhelp/Backup)
-[![Coverage Status](https://coveralls.io/repos/devhelp/Backup/badge.png)](https://coveralls.io/r/devhelp/Backup)
+[![Coverage Status](https://coveralls.io/repos/devhelp/Backup/badge.png?branch=master)](https://coveralls.io/r/devhelp/Backup?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/devhelp/Backup/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/devhelp/Backup/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1df16392-260e-4f42-adfc-f5ac2af4f449/mini.png)](https://insight.sensiolabs.com/projects/1df16392-260e-4f42-adfc-f5ac2af4f449)
 
