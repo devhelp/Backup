@@ -93,4 +93,4 @@ class BackupEvent extends Event
     {
         $this->errors = $errors;
     }
-} 
+}
