@@ -21,6 +21,8 @@
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
                 <directory>./vendor</directory>
+                <file>./Exception/Exception.php</file>
+                <file>./Strategy/BackupStrategyInterface.php</file>
             </exclude>
         </whitelist>
     </filter>
