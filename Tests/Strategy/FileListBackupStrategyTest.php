@@ -259,6 +259,24 @@ class FileListBackupStrategyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider getWithAllFiltersProvider
+     * @test
+     * @param array $input
+     */
+    public function testCount(array $input)
+    {
+        $fileListBackupStrategy = new FileListBackupStrategy();
+        $fileListBackupStrategy->setRemoteAdapter($this->getRemoteFilesystemMock($input));
+
+        $fileListBackupStrategy->addIgnoredDirectory('/web')
+            ->addIgnoredExtension('jpg')
+            ->addIgnoredFiles(new File('test/test.php'));
+        ;
+
+        $this->assertEquals(1, $fileListBackupStrategy->count());
+    }
+
+    /**
      * @param array $input
      * @return FilesystemInterface
      */

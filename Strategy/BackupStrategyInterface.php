@@ -9,7 +9,7 @@ use Devhelp\Component\Backup\Type\File;
  *
  * @author <michal@devhelp.pl>
  */
-interface BackupStrategyInterface
+interface BackupStrategyInterface extends \Countable
 {
     /**
      * Get file list to backup
@@ -17,4 +17,5 @@ interface BackupStrategyInterface
      * @return File[]
      */
     public function getFileList();
+
 }

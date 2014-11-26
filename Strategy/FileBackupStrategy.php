@@ -33,4 +33,12 @@ class FileBackupStrategy implements BackupStrategyInterface
             new File($this->filePath)
         );
     }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->getFileList());
+    }
 }

@@ -124,4 +124,11 @@ class FileListBackupStrategy implements BackupStrategyInterface
         return false;
     }
 
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->getFileList());
+    }
 }
