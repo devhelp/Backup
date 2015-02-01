@@ -18,7 +18,8 @@
   },
   "require-dev": {
     "phpspec/phpspec": "~2.0",
-    "henrikbjorn/phpspec-code-coverage": "~0.2"
+    "henrikbjorn/phpspec-code-coverage": "~0.2",
+    "satooshi/php-coveralls": "dev-master"
   },
   "config": {
     "bin-dir": "bin"
