@@ -1,0 +1,29 @@
+{
+    "name": "devhelp/backup",
+    "type": "library",
+    "description": "Create backups using many filesystems",
+    "keywords": ["backup"],
+    "homepage": "http://devhelp.pl",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Michał Sikora",
+        "homepage": "http://devhelp.pl"
+      }
+    ],
+    "require": {
+      "php": ">=5.4.0",
+      "league/flysystem": "0.5.*",
+      "symfony/event-dispatcher": "2.6.3"
+    },
+    "require-dev": {
+      "phpspec/phpspec": "~2.0",
+      "henrikbjorn/phpspec-code-coverage": "~0.2"
+    },
+    "config": {
+      "bin-dir": "bin"
+    },
+    "autoload": {
+      "psr-0": {"Devhelp\\Backup": "src/"}
+    }
+}
