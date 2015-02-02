@@ -5,7 +5,7 @@ namespace Devhelp\Backup\Notification;
 /**
  * @author <michal@devhelp.pl>
  */
-interface Notification
+interface NotificationInterface
 {
     /**
      * It runs when backup process has started

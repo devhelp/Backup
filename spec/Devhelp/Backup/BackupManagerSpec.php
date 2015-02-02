@@ -3,7 +3,7 @@
 namespace spec\Devhelp\Backup;
 
 use Devhelp\Backup\Backup;
-use Devhelp\Backup\Notification\Notification;
+use Devhelp\Backup\Notification\NotificationInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -12,7 +12,7 @@ use Prophecy\Argument;
  */
 class BackupManagerSpec extends ObjectBehavior
 {
-    function let(Backup $backup, Notification $notification)
+    function let(Backup $backup, NotificationInterface $notification)
     {
         $this->beConstructedWith($backup, $notification);
     }
@@ -22,7 +22,7 @@ class BackupManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Devhelp\Backup\BackupManager');
     }
 
-    function it_runs_backup_process(Notification $notification, Backup $backup)
+    function it_runs_backup_process(NotificationInterface $notification, Backup $backup)
     {
         $this->runProcess();
         $backup->run($notification)->shouldBeCalled();

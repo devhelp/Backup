@@ -2,14 +2,14 @@
 
 namespace Devhelp\Backup\Adapter\Flysystem;
 
-use Devhelp\Backup\Adapter\TargetFilesystemAdapter;
+use Devhelp\Backup\Adapter\TargetFilesystemAdapterInterface;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\Filesystem;
 
 /**
  * @author <michal@devhelp.pl>
  */
-class TargetFlysystemAdapter implements TargetFilesystemAdapter
+class TargetFlysystemAdapter implements TargetFilesystemAdapterInterface
 {
     /**
      * @var Filesystem

@@ -16,7 +16,7 @@ class TargetFlysystemAdapterSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Devhelp\Backup\Adapter\Flysystem\TargetFlysystemAdapter');
-        $this->shouldImplement('Devhelp\Backup\Adapter\TargetFilesystemAdapter');
+        $this->shouldImplement('Devhelp\Backup\Adapter\TargetFilesystemAdapterInterface');
     }
 
     function it_should_successfully_create_directory($path, Filesystem $filesystem)

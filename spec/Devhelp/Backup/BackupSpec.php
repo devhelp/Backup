@@ -2,9 +2,9 @@
 
 namespace spec\Devhelp\Backup;
 
-use Devhelp\Backup\Notification\Notification;
-use Devhelp\Backup\Adapter\SourceFilesystemAdapter;
-use Devhelp\Backup\Adapter\TargetFilesystemAdapter;
+use Devhelp\Backup\Notification\NotificationInterface;
+use Devhelp\Backup\Adapter\SourceFilesystemAdapterInterface;
+use Devhelp\Backup\Adapter\TargetFilesystemAdapterInterface;
 use Devhelp\Backup\Type\RemoteResource;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -15,8 +15,8 @@ use Prophecy\Argument;
 class BackupSpec extends ObjectBehavior
 {
     function let(
-        SourceFilesystemAdapter $sourceFilesystemAdapter,
-        TargetFilesystemAdapter $targetFilesystemAdapter
+        SourceFilesystemAdapterInterface $sourceFilesystemAdapter,
+        TargetFilesystemAdapterInterface $targetFilesystemAdapter
     )
     {
         $this->beConstructedWith($sourceFilesystemAdapter, $targetFilesystemAdapter);
@@ -28,9 +28,9 @@ class BackupSpec extends ObjectBehavior
     }
 
     function it_creates_backup_containing_files(
-        SourceFilesystemAdapter $sourceFilesystemAdapter,
-        TargetFilesystemAdapter $targetFilesystemAdapter,
-        Notification $notification
+        SourceFilesystemAdapterInterface $sourceFilesystemAdapter,
+        TargetFilesystemAdapterInterface $targetFilesystemAdapter,
+        NotificationInterface $notification
     )
     {
         $resources = [
@@ -51,9 +51,9 @@ class BackupSpec extends ObjectBehavior
     }
 
     function it_creates_backup_containing_directory_and_files(
-        SourceFilesystemAdapter $sourceFilesystemAdapter,
-        TargetFilesystemAdapter $targetFilesystemAdapter,
-        Notification $notification
+        SourceFilesystemAdapterInterface $sourceFilesystemAdapter,
+        TargetFilesystemAdapterInterface $targetFilesystemAdapter,
+        NotificationInterface $notification
     )
     {
         $resources = [
@@ -74,9 +74,9 @@ class BackupSpec extends ObjectBehavior
     }
 
     function it_creates_backup_with_error_while_reading_resource(
-        SourceFilesystemAdapter $sourceFilesystemAdapter,
-        TargetFilesystemAdapter $targetFilesystemAdapter,
-        Notification $notification
+        SourceFilesystemAdapterInterface $sourceFilesystemAdapter,
+        TargetFilesystemAdapterInterface $targetFilesystemAdapter,
+        NotificationInterface $notification
     )
     {
         $resources = [
@@ -94,9 +94,9 @@ class BackupSpec extends ObjectBehavior
     }
 
     function it_creates_backup_with_error_while_writing_resource(
-        SourceFilesystemAdapter $sourceFilesystemAdapter,
-        TargetFilesystemAdapter $targetFilesystemAdapter,
-        Notification $notification
+        SourceFilesystemAdapterInterface $sourceFilesystemAdapter,
+        TargetFilesystemAdapterInterface $targetFilesystemAdapter,
+        NotificationInterface $notification
     )
     {
         $resources = [

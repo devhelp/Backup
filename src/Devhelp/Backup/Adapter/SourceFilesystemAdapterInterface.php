@@ -7,7 +7,7 @@ use Devhelp\Backup\Type\RemoteResource;
 /**
  * @author <michal@devhelp.pl>
  */
-interface SourceFilesystemAdapter
+interface SourceFilesystemAdapterInterface
 {
     /**
      * @param string $path

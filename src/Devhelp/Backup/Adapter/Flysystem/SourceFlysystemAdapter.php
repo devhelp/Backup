@@ -2,14 +2,14 @@
 
 namespace Devhelp\Backup\Adapter\Flysystem;
 
-use Devhelp\Backup\Adapter\SourceFilesystemAdapter;
+use Devhelp\Backup\Adapter\SourceFilesystemAdapterInterface;
 use Devhelp\Backup\Type\RemoteResource;
 use League\Flysystem\Filesystem;
 
 /**
  * @author <michal@devhelp.pl>
  */
-class SourceFlysystemAdapter implements SourceFilesystemAdapter
+class SourceFlysystemAdapter implements SourceFilesystemAdapterInterface
 {
     /**
      * @var Filesystem

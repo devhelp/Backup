@@ -2,7 +2,7 @@
 
 namespace Devhelp\Backup;
 
-use Devhelp\Backup\Notification\Notification;
+use Devhelp\Backup\Notification\NotificationInterface;
 
 /**
  * @author <michal@devhelp.pl>
@@ -10,7 +10,7 @@ use Devhelp\Backup\Notification\Notification;
 class BackupManager
 {
     /**
-     * @var Notification
+     * @var NotificationInterface
      */
     private $notification;
 
@@ -19,7 +19,7 @@ class BackupManager
      */
     private $backup;
 
-    public function __construct(Backup $backup, Notification $notification)
+    public function __construct(Backup $backup, NotificationInterface $notification)
     {
         $this->notification = $notification;
         $this->backup = $backup;

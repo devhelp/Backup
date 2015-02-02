@@ -5,7 +5,7 @@ namespace Devhelp\Backup\Notification;
 /**
  * @author <michal@devhelp.pl>
  */
-class NullNotification implements Notification
+class NullNotification implements NotificationInterface
 {
     public function runProcess()
     {

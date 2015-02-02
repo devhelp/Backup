@@ -5,7 +5,7 @@ namespace Devhelp\Backup\Adapter;
 /**
  * @author <michal@devhelp.pl>
  */
-interface TargetFilesystemAdapter
+interface TargetFilesystemAdapterInterface
 {
     /**
      * @param string $path

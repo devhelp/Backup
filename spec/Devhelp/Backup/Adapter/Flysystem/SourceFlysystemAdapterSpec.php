@@ -16,7 +16,7 @@ class SourceFlysystemAdapterSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Devhelp\Backup\Adapter\Flysystem\SourceFlysystemAdapter');
-        $this->shouldImplement('Devhelp\Backup\Adapter\SourceFilesystemAdapter');
+        $this->shouldImplement('Devhelp\Backup\Adapter\SourceFilesystemAdapterInterface');
     }
 
     function it_should_successfully_read_stream_from_remote_file($path, Filesystem $filesystem)
@@ -31,5 +31,16 @@ class SourceFlysystemAdapterSpec extends ObjectBehavior
         $filesystem->readStream($path)->willReturn(false);
         $this->readStream($path)->shouldReturn(false);
         $filesystem->readStream($path)->shouldBeCalled();
+    }
+
+    function it_should_return_resources_list_from_source_filesystem(Filesystem $filesystem)
+    {
+        $filesystem->listContents('', true)->willReturn([
+            ['path' => 'test/1.jpg', 'type' => 'file'],
+            ['path' => 'test/2.jpg', 'type' => 'file'],
+            ['path' => 'test/3.jpg', 'type' => 'file']
+        ]);
+
+        $this->getResourcesList()->shouldBeArray();
     }
 }

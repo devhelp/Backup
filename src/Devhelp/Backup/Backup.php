@@ -2,9 +2,9 @@
 
 namespace Devhelp\Backup;
 
-use Devhelp\Backup\Notification\Notification;
-use Devhelp\Backup\Adapter\SourceFilesystemAdapter;
-use Devhelp\Backup\Adapter\TargetFilesystemAdapter;
+use Devhelp\Backup\Notification\NotificationInterface;
+use Devhelp\Backup\Adapter\SourceFilesystemAdapterInterface;
+use Devhelp\Backup\Adapter\TargetFilesystemAdapterInterface;
 use Devhelp\Backup\Type\RemoteResource;
 
 /**
@@ -13,24 +13,24 @@ use Devhelp\Backup\Type\RemoteResource;
 class Backup
 {
     /**
-     * @var SourceFilesystemAdapter
+     * @var SourceFilesystemAdapterInterface
      */
     private $sourceFilesystemAdapter;
     /**
-     * @var TargetFilesystemAdapter
+     * @var TargetFilesystemAdapterInterface
      */
     private $targetFilesystemAdapter;
 
     public function __construct(
-        SourceFilesystemAdapter $sourceFilesystemAdapter,
-        TargetFilesystemAdapter $targetFilesystemAdapter
+        SourceFilesystemAdapterInterface $sourceFilesystemAdapter,
+        TargetFilesystemAdapterInterface $targetFilesystemAdapter
     )
     {
         $this->sourceFilesystemAdapter = $sourceFilesystemAdapter;
         $this->targetFilesystemAdapter = $targetFilesystemAdapter;
     }
 
-    public function run(Notification $notification)
+    public function run(NotificationInterface $notification)
     {
         foreach ($this->sourceFilesystemAdapter->getResourcesList() as $resource) {
             $result = $this->backupResource($resource, $notification);
@@ -41,7 +41,7 @@ class Backup
         }
     }
 
-    private function backupResource(RemoteResource $remoteResource, Notification $notification)
+    private function backupResource(RemoteResource $remoteResource, NotificationInterface $notification)
     {
         if ($remoteResource->getType() === RemoteResource::TYPE_DIRECTORY) {
             return $this->targetFilesystemAdapter->createDirectory($remoteResource);

@@ -10,7 +10,7 @@ class NullNotificationSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Devhelp\Backup\Notification\NullNotification');
-        $this->shouldImplement('Devhelp\Backup\Notification\Notification');
+        $this->shouldImplement('Devhelp\Backup\Notification\NotificationInterface');
     }
 
     function it_should_do_nothing()
