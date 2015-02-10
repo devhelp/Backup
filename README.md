@@ -32,12 +32,9 @@ This component provides backup functionality. It uses `Flysystem` component.
             'username' => 'user',
             'password' => 'secret'
         )));
-        
         $targetFilesystem = new Filesystem(new LocalAdapter('/target/directory'));
-        $source = new SourceFlysystemAdapter($sourceFilesystem);
-        $target = new TargetFlysystemAdapter($targetFilesystem);
         $nullNotification = new NullNotification();
-        $backup = new Backup($source, $target);
-        $backupManager = new BackupManager($backup, $nullNotification);
+        
+        $backupManager = (new FlysystemBackupFactory($sourceFilesystem, $targetFilesystem))->create($nullNotification);
         $backupManager->runProcess();
 ```
