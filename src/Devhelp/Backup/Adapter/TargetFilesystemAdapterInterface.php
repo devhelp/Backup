@@ -16,7 +16,7 @@ interface TargetFilesystemAdapterInterface
     /**
      * @param string $path
      * @param resource $resource
-     * @return false|resource
+     * @return boolean|resource
      */
     public function writeStream($path, $resource);
 }
