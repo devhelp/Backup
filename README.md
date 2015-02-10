@@ -5,6 +5,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/devhelp/Backup/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/devhelp/Backup/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1df16392-260e-4f42-adfc-f5ac2af4f449/mini.png)](https://insight.sensiolabs.com/projects/1df16392-260e-4f42-adfc-f5ac2af4f449)
 
+
 ## Purpose
 
 This component provides backup functionality. It uses `Flysystem` component.
