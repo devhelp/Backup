@@ -18,32 +18,26 @@ This component provides backup functionality. It uses `Flysystem` component.
 
 ```php
     
-    use League\Flysystem\Filesystem;
-    use League\Flysystem\Adapter\Ftp as FtpAdapter;
-    use League\Flysystem\Adapter\Local as LocalAdapter;
-    use Devhelp\Backup\Backup;
-    use Devhelp\Backup\BackupManager;
-    use Devhelp\Backup\Adapter\Flysystem\SourceFlysystemAdapter;
-    use Devhelp\Backup\Adapter\Flysystem\TargetFlysystemAdapter;
-
-    $ftp = new Filesystem(new FtpAdapter(array(
-        'host' => 'example.com',
-        'username' => 'ftp_user',
-        'password' => 'ftp_password',
-        'port' => 21,
-        'root' => '/',
-        'passive' => true,
-        'ssl' => true,
-        'timeout' => 30,
-    )));
-    
-
-    $local = new Filesystem(new LocalAdapter($dir));
-    
-    $source = new SourceFlysystemAdapter($ftp);
-    $target = new TargetFlysystemAdapter($local);
-    $backup = new Backup($source, $target);
-    
-    $backupManager = new BackupManager($backup, new NullNotification());
-    $backupManager->runProcess();
+        use Devhelp\Backup\Adapter\Flysystem\SourceFlysystemAdapter;
+        use Devhelp\Backup\Adapter\Flysystem\TargetFlysystemAdapter;
+        use Devhelp\Backup\Backup;
+        use Devhelp\Backup\BackupManager;
+        use Devhelp\Backup\Notification\NullNotification;
+        use League\Flysystem\Filesystem;
+        use League\Flysystem\Adapter\Ftp as FtpAdapter;
+        use League\Flysystem\Adapter\Local as LocalAdapter;
+        
+        $sourceFilesystem = new Filesystem(new FtpAdapter(array(
+            'host' => 'example.com',
+            'username' => 'user',
+            'password' => 'secret'
+        )));
+        
+        $targetFilesystem = new Filesystem(new LocalAdapter('/target/directory'));
+        $source = new SourceFlysystemAdapter($sourceFilesystem);
+        $target = new TargetFlysystemAdapter($targetFilesystem);
+        $nullNotification = new NullNotification();
+        $backup = new Backup($source, $target);
+        $backupManager = new BackupManager($backup, $nullNotification);
+        $backupManager->runProcess();
 ```
