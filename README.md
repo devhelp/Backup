@@ -8,13 +8,18 @@
 
 ## Purpose
 
-This component provides backup functionality. It uses `Flysystem` component.
+This component provides backup functionality.
+
+It uses [`Flysystem`](https://github.com/thephpleague/flysystem) component.
+
 
 ## Instalation
 
 ```composer require 'devhelp/backup:dev-master'```
 
 ## Usage
+
+To set up connection between two Flysystem adapters please read [documentation](http://flysystem.thephpleague.com/)
 
 ```php
     
