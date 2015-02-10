@@ -21,6 +21,8 @@ It uses [`Flysystem`](https://github.com/thephpleague/flysystem) component.
 
 To set up connection between two Flysystem adapters please read [documentation](http://flysystem.thephpleague.com/)
 
+Below you can find simple usage which creates backup between ftp location and locale filesystem:
+
 ```php
     
         use Devhelp\Backup\Adapter\Flysystem\SourceFlysystemAdapter;
