@@ -6,6 +6,9 @@ use League\Flysystem\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * @author <michal@devhelp.pl>
+ */
 class SourceFlysystemAdapterSpec extends ObjectBehavior
 {
     function let(Filesystem $filesystem)

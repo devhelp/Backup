@@ -6,6 +6,9 @@ use Devhelp\Backup\Type\RemoteResource;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * @author <michal@devhelp.pl>
+ */
 class RemoteResourceSpec extends ObjectBehavior
 {
 

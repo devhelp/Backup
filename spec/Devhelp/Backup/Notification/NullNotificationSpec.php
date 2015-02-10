@@ -5,6 +5,9 @@ namespace spec\Devhelp\Backup\Notification;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * @author <michal@devhelp.pl>
+ */
 class NullNotificationSpec extends ObjectBehavior
 {
     function it_is_initializable()
