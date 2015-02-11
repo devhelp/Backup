@@ -3,6 +3,7 @@
 namespace Devhelp\Backup\Notification;
 
 use Devhelp\Backup\BackupEvents;
+use Devhelp\Backup\Type\RemoteResource;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -20,7 +21,7 @@ class EventDispatcherNotification implements NotificationInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function runProcess()
+    public function runProcess($nbOfResources)
     {
         $this->eventDispatcher->dispatch(BackupEvents::RUN_PROCESS_EVENT);
     }
@@ -30,17 +31,17 @@ class EventDispatcherNotification implements NotificationInterface
         $this->eventDispatcher->dispatch(BackupEvents::FINISH_PROCESS_EVENT);
     }
 
-    public function notifyErrorReadingResources()
+    public function notifyErrorReadingResources(RemoteResource $remoteResource)
     {
         $this->eventDispatcher->dispatch(BackupEvents::NOTIFY_ERROR_READING_EVENT);
     }
 
-    public function notifyErrorWritingResources()
+    public function notifyErrorWritingResources(RemoteResource $remoteResource)
     {
         $this->eventDispatcher->dispatch(BackupEvents::NOTIFY_ERROR_WRITING_EVENT);
     }
 
-    public function notifySuccessStepProcess()
+    public function notifySuccessStepProcess(RemoteResource $remoteResource)
     {
         $this->eventDispatcher->dispatch(BackupEvents::NOTIFY_SUCCESS_STEP_EVENT);
     }

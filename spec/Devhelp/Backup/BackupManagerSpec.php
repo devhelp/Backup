@@ -26,7 +26,5 @@ class BackupManagerSpec extends ObjectBehavior
     {
         $this->runProcess();
         $backup->run($notification)->shouldBeCalled();
-        $notification->runProcess()->shouldBeCalled();
-        $notification->finishProcess()->shouldBeCalled();
     }
 }

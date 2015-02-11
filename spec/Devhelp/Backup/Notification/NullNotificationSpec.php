@@ -2,6 +2,7 @@
 
 namespace spec\Devhelp\Backup\Notification;
 
+use Devhelp\Backup\Type\RemoteResource;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -16,12 +17,12 @@ class NullNotificationSpec extends ObjectBehavior
         $this->shouldImplement('Devhelp\Backup\Notification\NotificationInterface');
     }
 
-    function it_should_do_nothing()
+    function it_should_do_nothing(RemoteResource $remoteResource, $nbOfResources)
     {
-        $this->runProcess()->shouldReturn(null);
+        $this->runProcess($nbOfResources)->shouldReturn(null);
         $this->finishProcess()->shouldReturn(null);
-        $this->notifyErrorReadingResources()->shouldReturn(null);
-        $this->notifyErrorWritingResources()->shouldReturn(null);
-        $this->notifySuccessStepProcess()->shouldReturn(null);
+        $this->notifyErrorReadingResources($remoteResource)->shouldReturn(null);
+        $this->notifyErrorWritingResources($remoteResource)->shouldReturn(null);
+        $this->notifySuccessStepProcess($remoteResource)->shouldReturn(null);
     }
 }

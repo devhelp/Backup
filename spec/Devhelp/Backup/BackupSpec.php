@@ -47,7 +47,12 @@ class BackupSpec extends ObjectBehavior
         }
 
         $this->run($notification);
-        $notification->notifySuccessStepProcess()->shouldBeCalledTimes(3);
+
+        $notification->runProcess(count($resources))->shouldBeCalled();
+        foreach ($resources as $resource) {
+            $notification->notifySuccessStepProcess($resource)->shouldBeCalled();
+        }
+        $notification->finishProcess()->shouldBeCalled();
     }
 
     function it_creates_backup_containing_directory_and_files(
@@ -70,7 +75,12 @@ class BackupSpec extends ObjectBehavior
             $targetFilesystemAdapter->writeStream($resource, 'resource')->willReturn('resource');
         }
         $this->run($notification);
-        $notification->notifySuccessStepProcess()->shouldBeCalledTimes(2);
+
+        $notification->runProcess(3)->shouldBeCalled();
+        foreach ($resources as $resource) {
+            $notification->notifySuccessStepProcess($resource)->shouldBeCalled();
+        }
+        $notification->finishProcess()->shouldBeCalled();
     }
 
     function it_creates_backup_with_error_while_reading_resource(
@@ -88,9 +98,12 @@ class BackupSpec extends ObjectBehavior
         $sourceFilesystemAdapter->readStream($resources[0])->willReturn(false);
         $sourceFilesystemAdapter->readStream($resources[1])->willReturn('resource');
         $targetFilesystemAdapter->writeStream($resources[1], 'resource')->willReturn('resource');
+
         $this->run($notification);
-        $notification->notifyErrorReadingResources()->shouldBeCalledTimes(1);
-        $notification->notifySuccessStepProcess()->shouldBeCalledTimes(1);
+        $notification->runProcess(count($resources))->shouldBeCalled();
+        $notification->notifyErrorReadingResources($resources[0])->shouldBeCalledTimes(1);
+        $notification->notifySuccessStepProcess($resources[1])->shouldBeCalledTimes(1);
+        $notification->finishProcess()->shouldBeCalled();
     }
 
     function it_creates_backup_with_error_while_writing_resource(
@@ -109,9 +122,12 @@ class BackupSpec extends ObjectBehavior
         $sourceFilesystemAdapter->readStream($resources[1])->willReturn('resource');
         $targetFilesystemAdapter->writeStream($resources[0], 'resource')->willReturn('resource');
         $targetFilesystemAdapter->writeStream($resources[1], 'resource')->willReturn(false);
+
         $this->run($notification);
-        $notification->notifyErrorWritingResources()->shouldBeCalledTimes(1);
-        $notification->notifySuccessStepProcess()->shouldBeCalledTimes(1);
+        $notification->notifyErrorWritingResources($resources[1])->shouldBeCalledTimes(1);
+        $notification->notifySuccessStepProcess($resources[0])->shouldBeCalledTimes(1);
+        $notification->runProcess(count($resources))->shouldBeCalled();
+        $notification->finishProcess()->shouldBeCalled();
     }
 
 }

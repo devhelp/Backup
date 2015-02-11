@@ -32,13 +32,18 @@ class Backup
 
     public function run(NotificationInterface $notification)
     {
-        foreach ($this->sourceFilesystemAdapter->getResourcesList() as $resource) {
+        $resourcesList = $this->sourceFilesystemAdapter->getResourcesList();
+        $notification->runProcess(count($resourcesList));
+
+        foreach ($resourcesList as $resource) {
             $result = $this->backupResource($resource, $notification);
 
             if ($result === true) {
-                $notification->notifySuccessStepProcess();
+                $notification->notifySuccessStepProcess($resource);
             }
         }
+
+        $notification->finishProcess();
     }
 
     private function backupResource(RemoteResource $remoteResource, NotificationInterface $notification)
@@ -50,14 +55,14 @@ class Backup
         $fileStream = $this->sourceFilesystemAdapter->readStream($remoteResource);
 
         if ($fileStream === false) {
-            $notification->notifyErrorReadingResources();
+            $notification->notifyErrorReadingResources($remoteResource);
 
             return false;
         }
 
         $writeResult = $this->targetFilesystemAdapter->writeStream($remoteResource, $fileStream);
         if ($writeResult === false) {
-            $notification->notifyErrorWritingResources();
+            $notification->notifyErrorWritingResources($remoteResource);
 
             return false;
         }

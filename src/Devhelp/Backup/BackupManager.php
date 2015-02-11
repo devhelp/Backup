@@ -27,8 +27,8 @@ class BackupManager
 
     public function runProcess()
     {
-        $this->notification->runProcess();
+
         $this->backup->run($this->notification);
-        $this->notification->finishProcess();
+
     }
 }
