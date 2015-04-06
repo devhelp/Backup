@@ -25,10 +25,7 @@ Below you can find simple usage which creates backup between ftp location and lo
 
 ```php
     
-        use Devhelp\Backup\Adapter\Flysystem\SourceFlysystemAdapter;
-        use Devhelp\Backup\Adapter\Flysystem\TargetFlysystemAdapter;
-        use Devhelp\Backup\Backup;
-        use Devhelp\Backup\BackupManager;
+        use Devhelp\Backup\FlysystemBackupFactory;
         use Devhelp\Backup\Notification\NullNotification;
         use League\Flysystem\Filesystem;
         use League\Flysystem\Adapter\Ftp as FtpAdapter;
